@@ -5,12 +5,16 @@ import BodyWrapper from '../components/BodyWrapper';
 import OrderForm from '../components/OrderForm';
 import fetch from 'isomorphic-fetch';
 
+import { submitOrder } from '../actions/orderActions';
+
 class CashierContainer extends React.Component {
   constructor(props) {
     super(props);
   }
-  handleOrderSubmit() {
-
+  handleOrderSubmit(props) {
+    submitOrder(props, () => {
+      console.log('blah response', res);
+    });
   }
   renderOrderForm() {
     const {
