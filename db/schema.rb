@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207044542) do
+ActiveRecord::Schema.define(version: 20171207054300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,33 @@ ActiveRecord::Schema.define(version: 20171207044542) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.date     "pickupAt"
+    t.string   "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+  add_index "orders", ["pickupAt"], name: "index_orders_on_pickupAt", using: :btree
+  add_index "orders", ["status"], name: "index_orders_on_status", using: :btree
+
   create_table "pizza_kinds", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "pizza_orders", force: :cascade do |t|
+    t.integer  "pizza_id"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pizza_orders", ["order_id"], name: "index_pizza_orders_on_order_id", using: :btree
+  add_index "pizza_orders", ["pizza_id"], name: "index_pizza_orders_on_pizza_id", using: :btree
 
   create_table "pizzas", force: :cascade do |t|
     t.integer  "pizza_kind_id"
@@ -56,5 +78,8 @@ ActiveRecord::Schema.define(version: 20171207044542) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "orders", "customers"
+  add_foreign_key "pizza_orders", "orders"
+  add_foreign_key "pizza_orders", "pizzas"
   add_foreign_key "pizzas", "pizza_kinds"
 end
