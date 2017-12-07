@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.3.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -25,6 +25,7 @@ gem 'webpacker', '~> 3.0'
 gem 'react_on_rails', '10.0.2'
 gem 'devise'
 gem 'pg'
+gem 'bootstrap-sass', '~> 3.3.7'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
