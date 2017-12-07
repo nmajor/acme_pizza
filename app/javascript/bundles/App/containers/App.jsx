@@ -11,7 +11,7 @@ export default class App extends React.Component {
 
     if (user) {
       return (<CashierContainer
-        user={this.props.user}
+        {...this.props}
       />);
     }
   }

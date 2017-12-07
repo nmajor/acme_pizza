@@ -1,14 +1,18 @@
 {
   "dependencies": {
+    "@myob/react-bootstrap-datetimepicker": "git+https://github.com/MYOB-Technology/react-bootstrap-datetimepicker.git",
     "@rails/webpacker": "^3.0.2",
     "babel-preset-react": "^6.24.1",
     "coffeescript": "1.12.7",
+    "lodash": "^4.17.4",
+    "moment": "^2.19.3",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-on-rails": "^10.0.2"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.3",
     "webpack-dev-server": "^2.9.7"
   }
 }

@@ -19,10 +19,8 @@ export default class Header extends React.Component {
 
         <div className="navbar-wagon-item">
           <div className="dropdown">
-            <img src={user.avatar_url} className="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown" />
+            <img src={user.avatarUrl} className="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown" />
             <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Dashboard</a></li>
               <li><a href="#">Log Out</a></li>
             </ul>
           </div>
@@ -33,9 +31,6 @@ export default class Header extends React.Component {
         <div className="dropdown">
           <i className="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
           <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li><a href="#">Host</a></li>
-            <li><a href="#">Trips</a></li>
-            <li><a href="#">Messagese</a></li>
           </ul>
         </div>
       </div>
