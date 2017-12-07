@@ -1,4 +1,4 @@
-json.extract! order, :id
+json.extract! order, :id, :status, :pickup_at_clean, :pickup_at
 
 json.customer do
   json.extract! order.customer, :name, :id, :phone

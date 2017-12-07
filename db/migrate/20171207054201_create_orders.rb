@@ -3,8 +3,8 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.references :customer, index: true, foreign_key: true
       t.references :pizza, index: true, foreign_key: true
-      t.date :pickup_at
-      t.string :status
+      t.datetime :pickup_at
+      t.string :status, default: 'new'
 
       t.timestamps null: false
     end

@@ -8,14 +8,12 @@ import OrdersList from '../components/OrdersList';
 
 import { submitOrder, getOrders } from '../actions/orderActions';
 
-class CashierContainer extends React.Component {
+class ManagerContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       orders: [],
     };
-
-    this.handleOrderSubmit = this.handleOrderSubmit.bind(this);
   }
   componentDidMount() {
     const { orders } = this.state;
@@ -24,31 +22,12 @@ class CashierContainer extends React.Component {
       this.setState({ orders: [...orders, ...data] })
     });
   }
-  handleOrderSubmit(props) {
+  sordedOrders() {
     const { orders } = this.state;
 
-    submitOrder(props, (data) => {
-      if (!data.errors) {
-        this.setState({ orders: [...orders, data] })
-      }
-    });
-  }
-  renderOrderForm() {
-    const {
-      pizzaKindOptions,
-      pizzaSizeOptions,
-    } = this.props;
+    _.sortBy(() => {
 
-    return (<OrderForm
-      pizzaKindOptions={pizzaKindOptions}
-      pizzaSizeOptions={pizzaSizeOptions}
-      onSubmit={this.handleOrderSubmit}
-    />);
-  }
-  renderOrderList() {
-    return (<OrdersList
-      orders={this.state.orders}
-    />);
+    });
   }
   render() {
     const { user } = this.props;
@@ -57,12 +36,13 @@ class CashierContainer extends React.Component {
       <div>
         <Header user={user} />
         <BodyWrapper>
-          {this.renderOrderForm()}
-          {this.renderOrderList()}
+          <OrdersList
+            orders={this.state.orders}
+          />
         </BodyWrapper>
       </div>
     );
   }
 }
 
-export default CashierContainer;
+export default ManagerContainer;

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   end
   root to: redirect('/users/sign_in')
 
+  devise_scope :user do
+      get '/sign_out', :to => "devise/sessions#destroy"
+   end
+
   devise_for :users
 
 end

@@ -14,14 +14,12 @@ export default class Header extends React.Component {
       </a>
 
       <div className="navbar-wagon-right hidden-xs hidden-sm">
-        <a href="" className="navbar-wagon-item navbar-wagon-link">Host</a>
-        <a href="" className="navbar-wagon-item navbar-wagon-link">Trips</a>
 
         <div className="navbar-wagon-item">
           <div className="dropdown">
             <img src={user.avatarUrl} className="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown" />
             <ul className="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-              <li><a href="#">Log Out</a></li>
+              <li><a href="/sign_out">Log Out</a></li>
             </ul>
           </div>
         </div>

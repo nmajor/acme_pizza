@@ -8,20 +8,30 @@ export function submitOrder(props, cb) {
     }),
   })
   .then((res) => {
-    cb(res);
+    return res.json();
+  })
+  .then((data) => {
+    return cb(data);
   })
   .catch((err) => {
     console.log(err);
   });
 }
 
-export function getOrders(props, cb) {
+export function getOrders(cb) {
   fetch(`/orders`, {
     credentials: 'include',
     method: 'get',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+    }),
   })
   .then((res) => {
-    cb(res);
+    return res.json();
+  })
+  .then((data) => {
+    console.log('blah ', data);
+    return cb(data);
   })
   .catch((err) => {
     console.log(err);
