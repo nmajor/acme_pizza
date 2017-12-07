@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   authenticated :user do
-    root to: 'app#index'
+    root to: 'app#index', as: :main_root
     get 'orders/index'
     get 'orders/create'
   end

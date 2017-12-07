@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :customer
-  has_many :pizza_orders
-  has_many :pizzas, through: :pizza_orders
+  belongs_to :pizza
+
+  accepts_nested_attributes_for :customer, :pizza
 end
