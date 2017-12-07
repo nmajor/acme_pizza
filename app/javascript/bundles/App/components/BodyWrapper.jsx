@@ -6,7 +6,7 @@ const BodyWrapper = (props) => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-6 col-md-offset-3 top-bumper">
+        <div className="col-md-8 col-md-offset-2 top-bumper">
           {props.children}
         </div>
       </div>

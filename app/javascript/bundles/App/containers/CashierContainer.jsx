@@ -5,15 +5,24 @@ import BodyWrapper from '../components/BodyWrapper';
 import OrderForm from '../components/OrderForm';
 import fetch from 'isomorphic-fetch';
 
-import { submitOrder } from '../actions/orderActions';
+import { submitOrder, getOrders } from '../actions/orderActions';
 
 class CashierContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      orders: [];
+    };
+  }
+  componentDidMount() {
+    getOrders((res) => {
+      this.setState({ orders: [...this.state.orders, ...res.orders] })
+    });
   }
   handleOrderSubmit(props) {
     submitOrder(props, () => {
-      console.log('blah response', res);
+      if (!res.errors)
+      this.setState({ orders: [...this.state.orders, res] })
     });
   }
   renderOrderForm() {
@@ -28,6 +37,11 @@ class CashierContainer extends React.Component {
       onSubmit={this.handleOrderSubmit}
     />);
   }
+  renderOrderList() {
+    return (<OrderList
+      orders={this.state.orders}
+    />);
+  }
   render() {
     const { user } = this.props;
 
@@ -36,6 +50,7 @@ class CashierContainer extends React.Component {
         <Header user={user} />
         <BodyWrapper>
           {this.renderOrderForm()}
+          {this.renderOrderList()}
         </BodyWrapper>
       </div>
     );

@@ -1,4 +1,1 @@
-if order.errors
-  json.partial! "orders/errors", order: order
-else
-end
+json.partial! "orders/order", order: @order

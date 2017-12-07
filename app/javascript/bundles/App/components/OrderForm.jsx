@@ -11,9 +11,10 @@ class OrderForm extends React.Component {
     this.minimumPickupTime = moment().add(20, 'm');
     this.dateFormat = "MMMM Do YYYY, h:mm:ss a";
     this.state = {
+      name: null,
       phone: null,
-      pizzaKindId: null,
-      pizzaSize: null,
+      kindId: null,
+      size: null,
       pickupAt: this.minimumPickupTime,
     };
 
@@ -23,14 +24,14 @@ class OrderForm extends React.Component {
     this.handleSizeClick = this.handleSizeClick.bind(this);
   }
   handleSubmit(evt) {
-    evt.preventdefault()
+    evt.preventDefault();
     this.props.onSubmit(this.state);
   }
   handleKindClick(id) {
-    this.setState({ pizzaKindId: id });
+    this.setState({ kindId: id });
   }
   handleSizeClick(size) {
-    this.setState({ pizzaSize: size });
+    this.setState({ size: size });
   }
   handlePickupAtChange(time) {
     this.setState({ pickupAt: time });
@@ -41,8 +42,8 @@ class OrderForm extends React.Component {
     this.setState(newState);
   }
   renderKindOption(kind) {
-    const { pizzaKindId } = this.state;
-    const buttonType = kind.id === pizzaKindId ? 'primary' : 'default';
+    const { kindId } = this.state;
+    const buttonType = kind.id === kindId ? 'primary' : 'default';
 
     return (<div key={kind.id} className="btn-group" role="group">
       <button onClick={() => { this.handleKindClick(kind.id); }} type="button" className={`btn btn-${buttonType}`}>{kind.name}</button>
@@ -57,15 +58,15 @@ class OrderForm extends React.Component {
       {options}
     </div>);
   }
-  renderSizeOption(size) {
-    const { pizzaSize } = this.state;
-    const buttonType = size === pizzaSize ? 'primary' : 'default';
+  renderSizeOption(value) {
+    const { size } = this.state;
+    const buttonType = size === value ? 'primary' : 'default';
 
-    return (<div key={size} className="btn-group" role="group">
-      <button onClick={() => { this.handleSizeClick(size); }} type="button" className={`btn btn-${buttonType}`}>{_.capitalize(size)}</button>
+    return (<div key={value} className="btn-group" role="group">
+      <button onClick={() => { this.handleSizeClick(value); }} type="button" className={`btn btn-${buttonType}`}>{_.capitalize(value)}</button>
     </div>);
   }
-  renderPizzaSizeOptions() {
+  renderSizeOptions() {
     const options = this.props.pizzaSizeOptions.map((size) => {
       return this.renderSizeOption(size);
     });
@@ -76,10 +77,14 @@ class OrderForm extends React.Component {
   }
   render() {
     const { user } = this.props;
-    const { pickupAt, phone } = this.state;
+    const { pickupAt, phone, name } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="name">Customer Name</label>
+          <input value={name || ''} onChange={this.handleInputChange} type="text" name="name" className="form-control" />
+        </div>
         <div className="form-group">
           <label htmlFor="phone">Customer Phone Number</label>
           <input value={phone || ''} onChange={this.handleInputChange} type="text" name="phone" className="form-control" placeholder="555-555-5555" />
@@ -90,7 +95,7 @@ class OrderForm extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="pizza-size">Pizza Size</label>
-          {this.renderPizzaSizeOptions()}
+          {this.renderSizeOptions()}
         </div>
         <div className="form-group">
           <label htmlFor="pickup-at">Pickup Time - {moment(pickupAt).fromNow()}</label>

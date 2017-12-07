@@ -1,5 +1,5 @@
 export function submitOrder(props, cb) {
-  fetch(`${baseURL}/api/orders`, {
+  fetch(`/orders`, {
     credentials: 'include',
     method: 'post',
     body: JSON.stringify(props),
@@ -16,7 +16,7 @@ export function submitOrder(props, cb) {
 }
 
 export function getOrders(props, cb) {
-  fetch(`${baseURL}/api/orders`, {
+  fetch(`/orders`, {
     credentials: 'include',
     method: 'get',
   })
