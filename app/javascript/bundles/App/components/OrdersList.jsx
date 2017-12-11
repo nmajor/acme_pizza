@@ -8,7 +8,7 @@ export default class OrderList extends React.Component {
   //   super(props);
   // }
   renderListItem(order) {
-    return (<tr key={order.id}>
+    return (<tr className="order-item" key={order.id}>
       <td>{order.id}</td>
       <td>{_.get(order, 'customer.name')}</td>
       <td>{_.get(order, 'customer.phone')}</td>
