@@ -6,17 +6,14 @@
     heroku buildpacks:add --index 1 heroku/nodejs
 
 ### Debugging webpack
-rm ./bin/webpack ./bin/webpack-dev-server && bundle binstub webpacker --standalone
-rake webpacker:install
-rake webpacker:install:react
+    rm ./bin/webpack ./bin/webpack-dev-server && bundle binstub webpacker --standalone
+    rake webpacker:install
+    rake webpacker:install:react
 
 ## Testing
 
-### Run only model specs
-bundle exec rspec spec/models
+### Run rails tests
+    rspec spec/models
 
-### Run only specs for AccountsController
-bundle exec rspec spec/controllers/accounts_controller_spec.rb
-
-### Run only spec on line 8 of AccountsController
-bundle exec rspec spec/controllers/accounts_controller_spec.rb:8
+### Run react tests
+    npm test
