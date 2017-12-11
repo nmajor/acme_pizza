@@ -9,3 +9,14 @@
 rm ./bin/webpack ./bin/webpack-dev-server && bundle binstub webpacker --standalone
 rake webpacker:install
 rake webpacker:install:react
+
+## Testing
+
+### Run only model specs
+bundle exec rspec spec/models
+
+### Run only specs for AccountsController
+bundle exec rspec spec/controllers/accounts_controller_spec.rb
+
+### Run only spec on line 8 of AccountsController
+bundle exec rspec spec/controllers/accounts_controller_spec.rb:8

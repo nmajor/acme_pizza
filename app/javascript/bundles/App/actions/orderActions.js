@@ -2,7 +2,7 @@ export function submitOrder(props, cb) {
   fetch(`/orders`, {
     credentials: 'include',
     method: 'post',
-    body: JSON.stringify(props),
+    body: JSON.stringify({ order: props }),
     headers: new Headers({
       'Content-Type': 'application/json',
     }),

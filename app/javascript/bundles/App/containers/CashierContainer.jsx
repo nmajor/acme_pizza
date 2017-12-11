@@ -24,13 +24,14 @@ class CashierContainer extends React.Component {
       this.setState({ orders: [...orders, ...data] })
     });
   }
-  handleOrderSubmit(props) {
+  handleOrderSubmit(props, cb) {
     const { orders } = this.state;
 
     submitOrder(props, (data) => {
       if (!data.errors) {
         this.setState({ orders: [...orders, data] })
       }
+      cb(data);
     });
   }
   renderOrderForm() {

@@ -2,8 +2,9 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root to: 'app#index', as: :main_root
-    resources :orders, only: [:index, :create]
+    # resources :orders, only: [:index, :create]
   end
+  resources :orders, only: [:index, :create], format: 'json'
   root to: redirect('/users/sign_in')
 
   devise_scope :user do

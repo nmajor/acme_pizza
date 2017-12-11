@@ -5,21 +5,21 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.save
+    render :status => 400 if !@order.save
   end
 
   private
     def order_params
       {
         customer_attributes: {
-          name: params["name"],
-          phone: params["phone"],
+          name: params["order"]["name"],
+          phone: params["order"]["phone"],
         },
         pizza_attributes: {
-          size: params["size"],
-          pizza_kind_id: params["kindId"],
+          size: params["order"]["size"],
+          pizza_kind_id: params["order"]["pizza_kind_id"],
         },
-        pickup_at: (params["pickupAt"] || '').to_datetime
+        pickup_at: (params["order"]["pickup_at"] || '').to_datetime
       }
     end
 end

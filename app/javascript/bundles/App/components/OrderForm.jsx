@@ -8,33 +8,37 @@ class OrderForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.minimumPickupTime = moment().add(20, 'm');
     this.dateFormat = "MMMM Do YYYY, h:mm:ss a";
-    this.state = {
-      name: null,
-      phone: null,
-      kindId: null,
-      size: null,
-      pickupAt: this.minimumPickupTime,
-    };
+    this.state = this.initState();
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleKindClick = this.handleKindClick.bind(this);
     this.handleSizeClick = this.handleSizeClick.bind(this);
   }
+  initState() {
+    return {
+      name: null,
+      phone: null,
+      pizza_kind_id: null,
+      size: null,
+      pickup_at: moment().add(20, 'm'),
+    };
+  }
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.onSubmit(this.state);
+    this.props.onSubmit(this.state, () => {
+      this.setState(this.initState());
+    });
   }
   handleKindClick(id) {
-    this.setState({ kindId: id });
+    this.setState({ pizza_kind_id: id });
   }
   handleSizeClick(size) {
     this.setState({ size: size });
   }
   handlePickupAtChange(time) {
-    this.setState({ pickupAt: time });
+    this.setState({ pickup_at: time });
   }
   handleInputChange(evt) {
     const newState = {};
@@ -42,8 +46,8 @@ class OrderForm extends React.Component {
     this.setState(newState);
   }
   renderKindOption(kind) {
-    const { kindId } = this.state;
-    const buttonType = kind.id === kindId ? 'primary' : 'default';
+    const { pizza_kind_id } = this.state;
+    const buttonType = kind.id === pizza_kind_id ? 'primary' : 'default';
 
     return (<div key={kind.id} className="btn-group" role="group">
       <button onClick={() => { this.handleKindClick(kind.id); }} type="button" className={`btn btn-${buttonType}`}>{kind.name}</button>
@@ -77,7 +81,7 @@ class OrderForm extends React.Component {
   }
   render() {
     const { user } = this.props;
-    const { pickupAt, phone, name } = this.state;
+    const { pickup_at, phone, name } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -98,7 +102,7 @@ class OrderForm extends React.Component {
           {this.renderSizeOptions()}
         </div>
         <div className="form-group">
-          <label htmlFor="pickup-at">Pickup Time - {moment(pickupAt).fromNow()}</label>
+          <label htmlFor="pickup-at">Pickup Time - {moment(pickup_at).fromNow()}</label>
 
         </div>
         <div className="form-group">
